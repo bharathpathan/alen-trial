@@ -21,9 +21,10 @@
     <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open the menu" aria-expanded="false" aria-controls="site-nav">${icon('menu')}</button>
     <nav class="nav" id="site-nav" aria-label="Site">
       ${link('index.html', 'Product', 'home')}
+      ${link('how-it-works.html', 'How it works', 'how')}
       ${link('features.html', 'Features', 'features')}
+      ${link('enterprise.html', 'Enterprise', 'enterprise')}
       ${link('walkthrough.html', 'Walkthrough', 'walkthrough')}
-      ${link('privacy.html', 'Privacy', 'privacy')}
       <button class="icon-btn" id="theme-btn" type="button"></button>
       <a class="btn pri sm" href="trial.html">${icon('key')}Get a free trial</a>
     </nav>
@@ -38,7 +39,7 @@
     <a class="brand" href="index.html"><img src="assets/logo.svg" alt="" width="26" height="26"/>Project ALEN</a>
     <span>The AI architecture workbench for VS Code.</span>
     <nav aria-label="Footer">
-      <a href="features.html">Features</a><a href="walkthrough.html">Walkthrough</a><a href="trial.html">Free trial</a><a href="privacy.html">Privacy</a>
+      <a href="how-it-works.html">How it works</a><a href="features.html">Features</a><a href="enterprise.html">Enterprise</a><a href="walkthrough.html">Walkthrough</a><a href="trial.html">Free trial</a><a href="privacy.html">Privacy</a>
     </nav>
     <span style="width:100%">© ${new Date().getFullYear()} Project ALEN. Paid plans are coming soon.</span>
   </div>

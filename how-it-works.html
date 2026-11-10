@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How it works · Project ALEN</title>
+  <meta name="description" content="How Project ALEN works: local-first by design, how it imports existing code, how a new project goes from idea to tested code, and how the AI engine plans, isolates, verifies and learns." />
+  <meta name="theme-color" content="#2f5bea" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="assets/theme-init.js"></script>
+  <link rel="stylesheet" href="assets/site.css" />
+  <link rel="stylesheet" href="assets/live.css" />
+</head>
+<body data-page="how">
+  <div data-site-head></div>
+  <main id="main">
+    <section class="hero" style="padding-bottom:36px">
+      <div class="wrap" style="grid-template-columns:1fr">
+        <div>
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#graph"/></svg>Under the hood</span>
+          <h1>How Project ALEN <span class="grad">actually works</span></h1>
+          <p class="lead">ALEN keeps one model of your system and runs everything around it on your own machine. Here is what happens when you import code, start something new, or ask an agent for a change, and where your data goes (it stays with you).</p>
+          <nav class="chips" aria-label="On this page">
+            <a href="#local">Local-first</a><a href="#import">Import existing code</a><a href="#new">Start a new project</a><a href="#engine">The AI engine</a><a href="#verify">Verification</a><a href="#memory">Memory</a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Local-first -->
+    <section class="block" id="local" style="padding-top:24px">
+      <div class="wrap">
+        <div class="local-band reveal">
+          <div>
+            <span class="badge-ok"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#lock"/></svg>Local-first by design</span>
+            <h2>Your code and your data stay on your machine</h2>
+            <p>ALEN is an extension that runs inside VS Code on your computer. The architecture model, the code index, memory, drafts, run history and logs are plain files in your project's <code>.ai-architect</code> folder and in your home folder. <b>There is no Project ALEN server that receives your code.</b></p>
+            <ul class="ticks">
+              <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Use a local model and nothing leaves at all.</b> Ollama, llama.cpp, vLLM or any OpenAI-style server on your machine or network.</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Use a cloud model and you choose what goes.</b> Only the context a task needs, after secrets are redacted, straight from your machine to the provider you configured, with your own key.</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Private folders never leave.</b> Mark them once; only local models may read them.</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>The only call to us is the key check:</b> the key, nothing else.</span></li>
+            </ul>
+          </div>
+          <div class="live-wrap">
+            <svg class="live" viewBox="0 0 560 400" role="img" aria-label="Your machine holds VS Code with Project ALEN, your code, the project memory and an optional local model. Outside, an optional AI provider receives only approved, redacted context, and the key service receives only the key.">
+              <rect class="zone" x="10" y="14" width="370" height="372" rx="20" />
+              <text class="zone-label" x="30" y="42">YOUR MACHINE</text>
+              <g><rect class="box-acc" x="120" y="150" width="150" height="70" rx="14" /><text x="140" y="180">Project ALEN</text><text class="t-sub" x="140" y="200">engine in VS Code</text></g>
+              <g><rect class="box" x="34" y="66" width="130" height="56" rx="12" /><text x="50" y="90">Your code</text><text class="t-sub" x="50" y="108">read, edited in place</text></g>
+              <g><rect class="box" x="226" y="66" width="134" height="56" rx="12" /><text x="242" y="90">.ai-architect/</text><text class="t-sub" x="242" y="108">model, index, memory</text></g>
+              <g><rect class="box" x="34" y="250" width="140" height="56" rx="12" /><text x="50" y="274">Local model</text><text class="t-sub" x="50" y="292">optional · Ollama…</text></g>
+              <g><rect class="box" x="216" y="250" width="144" height="56" rx="12" /><text x="232" y="274">Builds &amp; tests</text><text class="t-sub" x="232" y="292">worktrees, Docker</text></g>
+              <text class="t-sub" x="34" y="350">Secrets in VS Code's encrypted store</text>
+              <text class="t-sub" x="34" y="368">Logs and audit trail in your project</text>
+              <path id="w1" class="wire-acc" d="M150 122 C 160 135, 170 140, 175 150" />
+              <path id="w2" class="wire-acc" d="M290 122 C 280 135, 260 140, 245 150" />
+              <path id="w3" class="wire-acc" d="M150 220 C 140 232, 120 240, 110 250" />
+              <path id="w4" class="wire-acc" d="M230 220 C 250 232, 270 240, 285 250" />
+              <circle class="dot" r="4"><animateMotion dur="1.6s" repeatCount="indefinite"><mpath href="#w1" /></animateMotion></circle>
+              <circle class="dot" r="4"><animateMotion dur="1.9s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#w2" /></animateMotion></circle>
+              <circle class="dot" r="4"><animateMotion dur="1.7s" repeatCount="indefinite"><mpath href="#w3" /></animateMotion></circle>
+              <circle class="dot" r="4"><animateMotion dur="2.1s" repeatCount="indefinite"><mpath href="#w4" /></animateMotion></circle>
+              <g><rect class="box" x="410" y="110" width="140" height="70" rx="14" /><text x="424" y="138">AI provider</text><text class="t-sub" x="424" y="156">optional, your key</text><text class="t-sub" x="424" y="171">you pick which</text></g>
+              <path id="w5" class="wire-opt" d="M270 175 C 330 170, 360 150, 410 145" />
+              <text class="t-sub" x="300" y="138">approved, redacted</text>
+              <circle class="dot-mut" r="3"><animateMotion dur="3.4s" repeatCount="indefinite"><mpath href="#w5" /></animateMotion></circle>
+              <g><rect class="box" x="410" y="250" width="140" height="56" rx="14" /><text x="424" y="274">Key check</text><text class="t-sub" x="424" y="292">the key only</text></g>
+              <path id="w6" class="wire-opt" d="M270 200 C 340 215, 360 270, 410 278" />
+              <circle class="dot-mut" r="3"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#w6" /></animateMotion></circle>
+            </svg>
+            <div class="legend"><span><i class="zone"></i>Stays on your machine</span><span><i></i>Local traffic</span><span><i class="opt"></i>Optional, and only what you allow</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Import -->
+    <section class="block alt" id="import">
+      <div class="wrap split">
+        <div class="reveal">
+          <span class="kicker">Import existing code</span>
+          <h2>From a repository to an architecture you can trust</h2>
+          <p>Open any folder and ALEN reads it in layers, cheapest and most certain first. Facts come from the code itself; AI only fills the gaps, and everything it adds is checked against those facts before you see it.</p>
+          <ul class="ticks">
+            <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Real parsers, not guesses:</b> syntax trees for each language, 34 framework packs (Spring, ASP.NET Core, Django, Rails, NestJS, FastAPI, Go, Rust, Next.js and more).</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>What is deployed, not just written:</b> Compose, Kubernetes, Helm, Terraform, OpenAPI, AsyncAPI, proto and GraphQL files add evidence.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Every row has a source and a confidence.</b> AI-only findings start unticked, and the report names what could not be seen.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>You review, then accept.</b> Nothing enters the model until you say so.</span></li>
+          </ul>
+        </div>
+        <div class="live-wrap reveal" aria-label="The import pipeline, layer by layer">
+          <div class="layers">
+            <div class="layer"><b>L0</b><span>Inventory<small>files, languages, what is generated or vendored</small></span><em>index</em></div>
+            <div class="layer"><b>L1</b><span>Build model<small>workspaces, modules, manifests, lockfiles</small></span><em>units</em></div>
+            <div class="layer"><b>L2</b><span>Unit classifier<small>service · frontend · worker · job · library</small></span><em>claims</em></div>
+            <div class="layer"><b>L3</b><span>Code facts<small>routes, clients, topics, tables, config</small></span><em>symbols · edges</em></div>
+            <div class="layer"><b>L4</b><span>Declared &amp; deployed<small>compose, k8s, helm, terraform, API specs</small></span><em>claims</em></div>
+            <div class="layer"><b>L5</b><span>Fusion<small>one identity per component, confidence, coverage</small></span><em>proposal</em></div>
+            <div class="layer"><b>L6</b><span>AI, for gaps only<small>every claim checked against L0–L4</small></span><em>verified</em></div>
+            <div class="layer"><b>L7</b><span>Runtime evidence<small>optional: served OpenAPI, traces, CI reports</small></span><em>observed</em></div>
+          </div>
+          <div class="result-row"><span class="pill ok">✓ 5 components</span><span class="pill ok">✓ 38 endpoints</span><span class="pill acc">6 connections</span><span class="pill warn">2 need your review</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- New project -->
+    <section class="block" id="new">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="kicker">Start a new project</span>
+          <h2>From an idea to running, tested code</h2>
+          <p>Describe what you are building. ALEN turns it into requirements and an architecture you approve, generates a solid starting point for each component, then lets agents implement the behaviour, with builds and tests at every step.</p>
+        </div>
+        <div class="live-wrap reveal">
+          <div class="timeline" aria-label="The steps of a new project">
+            <div class="tl"><i></i><b>Describe</b><span>goal, users, rules</span></div>
+            <div class="tl"><i></i><b>Requirements</b><span>gaps and questions found</span></div>
+            <div class="tl"><i></i><b>Architecture</b><span>AI proposes, you approve</span></div>
+            <div class="tl"><i></i><b>Scaffold</b><span>services, UI, CI, Helm</span></div>
+            <div class="tl"><i></i><b>Implement</b><span>agents per component</span></div>
+            <div class="tl"><i></i><b>Verify</b><span>build, tests, contracts</span></div>
+          </div>
+        </div>
+        <div class="grid c3" style="margin-top:22px">
+          <article class="card reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#sparkles"/></svg></span><h3>Requirements first</h3><p>ALEN checks what you wrote for missing entities, validation, authorisation and error behaviour, and asks before anything is generated.</p></article>
+          <article class="card reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#code"/></svg></span><h3>Real scaffolds</h3><p>Spring Boot, Express, FastAPI and React/Vite projects with OpenAPI contracts, Dockerfiles, Compose, hardened Helm charts, CI workflows and an ADR.</p></article>
+          <article class="card reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#flask"/></svg></span><h3>Honest about done</h3><p>Generated code is a start. ALEN tracks what is still a stub, and only calls a route done when a test calls it.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engine -->
+    <section class="block alt" id="engine">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="kicker">The AI engine</span>
+          <h2>One engine, one loop, you in charge</h2>
+          <p>Every piece of agent work, whether from chat, a schedule or the editor, goes through the same engine. A primary agent owns the plan and the edits and calls in specialists (analyst, reviewer, tester, security) only when needed.</p>
+        </div>
+        <div class="live-wrap reveal">
+          <div class="loop" aria-label="The steps of one agent run">
+            <div class="stage"><b>Goal</b><span>from you, a ticket, or a schedule</span></div>
+            <div class="stage"><b>Localise</b><span>the code graph finds the few files that matter</span></div>
+            <div class="stage you"><b>Plan</b><span>steps you approve before any edit</span></div>
+            <div class="stage"><b>Isolate</b><span>a separate worktree or container</span></div>
+            <div class="stage"><b>Edit</b><span>with your rules, memory and past fixes</span></div>
+            <div class="stage"><b>Verify</b><span>the ladder: types to mutation tests</span></div>
+            <div class="stage you"><b>Review</b><span>a draft with the diff and the evidence</span></div>
+            <div class="stage"><b>Learn</b><span>facts and playbooks for next time</span></div>
+          </div>
+        </div>
+        <div class="grid c2" style="margin-top:22px">
+          <div class="reveal">
+            <template id="engine-script">p|Agent ▸ add pagination to the orders list
+m|● localise   orders-api: 4 files, web: 2 files
+m|● plan       4 steps · waiting for approval
+ok|✓ approved by you
+m|● worktree   .ai-architect/worktrees/run-7f2
+m|● edit       6 files · +184 −22
+ok|✓ type check   ✓ lint   ✓ tests 42/42
+ok|✓ contracts    ✓ running app
+w|! reviewer: add an index on orders(created_at)
+ok|✓ draft ready · evidence recorded</template>
+            <div class="term" data-script="engine-script" aria-label="An example agent run, typed out"></div>
+          </div>
+          <div class="grid" style="gap:12px">
+            <article class="card reveal"><h3 style="margin-top:0">Any model, routed by results</h3><p>OpenAI, Anthropic, Gemini, local and compatible endpoints. ALEN measures which model does which task well and routes there, with failover chains and budgets.</p></article>
+            <article class="card reveal"><h3 style="margin-top:0">Guardrails on every tool call</h3><p>Permission rules, workspace trust, a data classifier that keeps sensitive files away from cloud models, and secret redaction on every request.</p></article>
+            <article class="card reveal"><h3 style="margin-top:0">Pause, resume, replay</h3><p>Runs survive a restart. Approvals wait for you; work done while you were away lands in the inbox, never in your branch.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Verify -->
+    <section class="block" id="verify">
+      <div class="wrap split rev">
+        <div class="reveal">
+          <span class="kicker">Verification</span>
+          <h2>Proof climbs a ladder</h2>
+          <p>Each change climbs from the cheapest check to the most thorough. A failing rung stops the climb and goes back to the agent for repair; a tool that is not installed is skipped and named, never silently passed.</p>
+          <ul class="ticks">
+            <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Affected tests only</b>, chosen from the code graph, so checks stay fast.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Mutation spot checks</b> prove the tests would catch a broken change.</span></li>
+            <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Evidence is recorded</b> with the run, in a tamper-evident log.</span></li>
+          </ul>
+        </div>
+        <div class="live-wrap reveal">
+          <div class="ladder" aria-label="The verification ladder, from type check to mutation check">
+            <div class="rung"><span class="st"></span>Type check<small>tsc · mypy · javac</small></div>
+            <div class="rung"><span class="st"></span>Lint<small>project rules</small></div>
+            <div class="rung"><span class="st"></span>Affected tests<small>42 / 42</small></div>
+            <div class="rung"><span class="st"></span>Contract checks<small>OpenAPI</small></div>
+            <div class="rung"><span class="st"></span>Running-app check<small>headless browser</small></div>
+            <div class="rung"><span class="st"></span>Mutation spot check<small>5 / 5 killed</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memory -->
+    <section class="block alt" id="memory">
+      <div class="wrap">
+        <div class="sec-head center reveal"><span class="kicker">Memory</span><h2>It remembers, on your machine</h2><p>Two kinds of memory, both plain files you can read, export or clear.</p></div>
+        <div class="grid c2">
+          <article class="card reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#folder"/></svg></span><h3>Project memory</h3><p>In the project's <code>.ai-architect</code> folder.</p>
+            <ul><li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>Decisions, next steps, a glossary of domain terms</li><li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>How to build and test, conventions and pitfalls agents learned</li><li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>Past fixes and playbooks, offered again when they fit</li><li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>Where you left off</li></ul></article>
+          <article class="card reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#brain"/></svg></span><h3>Global memory</h3><p>In your home folder, for every project.</p>
+            <ul><li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>Recent projects, pinned favourites</li><li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>Your own rules for every project</li><li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>Saved prompts and AI connections</li><li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>Your subscription and time left</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block"><div class="band-wrap"><div class="band reveal"><div><h2>See it on your own code</h2><p>Seven days, every feature, and your code never leaves your machine.</p></div><a class="btn" href="trial.html"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#key"/></svg>Get my trial key</a></div></div></section>
+  </main>
+  <div data-site-foot></div>
+  <script src="assets/site.js"></script>
+  <script src="assets/live.js"></script>
+</body>
+</html>

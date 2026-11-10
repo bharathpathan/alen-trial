@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
   <script src="assets/theme-init.js"></script>
   <link rel="stylesheet" href="assets/site.css" />
+  <link rel="stylesheet" href="assets/live.css" />
 </head>
 <body data-page="home">
   <div data-site-head></div>
@@ -85,6 +86,53 @@
       </div>
     </section>
 
+    <section class="block" style="padding-top:0">
+      <div class="wrap">
+        <div class="local-band reveal">
+          <div>
+            <span class="badge-ok"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#lock"/></svg>Local-first</span>
+            <h2>All your data stays on your machine</h2>
+            <p>Your code, the architecture model, memory, drafts and logs live in your project and your home folder. Project ALEN has no server that stores or even sees your code.</p>
+            <ul class="ticks">
+              <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Local model?</b> Nothing leaves your machine.</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Cloud model?</b> Only what a task needs, redacted, straight to the provider you chose.</span></li>
+              <li><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg><span><b>Us?</b> Only your key, to check it is valid.</span></li>
+            </ul>
+            <p style="margin-top:18px"><a href="how-it-works.html#local">See exactly where data goes →</a></p>
+          </div>
+          <div class="live-wrap">
+            <svg class="live" viewBox="0 0 460 300" role="img" aria-label="Inside your machine, your code, the model and memory flow to and from Project ALEN. Nothing crosses the boundary unless you allow it.">
+              <rect class="zone" x="10" y="12" width="440" height="276" rx="20" />
+              <text class="zone-label" x="30" y="40">YOUR MACHINE</text>
+              <g><rect class="box-acc" x="160" y="120" width="140" height="64" rx="14" /><text x="182" y="148">Project ALEN</text><text class="t-sub" x="182" y="167">in VS Code</text></g>
+              <g><rect class="box" x="30" y="62" width="120" height="50" rx="12" /><text x="46" y="92">Your code</text></g>
+              <g><rect class="box" x="310" y="62" width="120" height="50" rx="12" /><text x="326" y="92">Model</text></g>
+              <g><rect class="box" x="30" y="210" width="120" height="50" rx="12" /><text x="46" y="240">Memory</text></g>
+              <g><rect class="box" x="310" y="210" width="120" height="50" rx="12" /><text x="326" y="240">Builds, tests</text></g>
+              <path id="h1" class="wire-acc" d="M150 92 C 175 100, 180 110, 190 120" />
+              <path id="h2" class="wire-acc" d="M310 92 C 285 100, 280 110, 270 120" />
+              <path id="h3" class="wire-acc" d="M150 230 C 175 220, 180 200, 190 184" />
+              <path id="h4" class="wire-acc" d="M310 230 C 285 220, 280 200, 270 184" />
+              <circle class="dot" r="4"><animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#h1" /></animateMotion></circle>
+              <circle class="dot" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#h2" /></animateMotion></circle>
+              <circle class="dot" r="4"><animateMotion dur="1.6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#h3" /></animateMotion></circle>
+              <circle class="dot" r="4"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#h4" /></animateMotion></circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block alt">
+      <div class="wrap">
+        <div class="sec-head center reveal"><span class="kicker">Two ways to start</span><h2>Bring your code, or start from an idea</h2></div>
+        <div class="grid c2">
+          <article class="card reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#folder"/></svg></span><h3>Import existing code</h3><p>Open a repository. ALEN reads it in layers (files, build files, code facts, deployment files) and proposes the components, APIs, data and connections, each with its source and confidence. AI fills only the gaps, and its claims are checked.</p><p style="margin-top:12px"><a href="how-it-works.html#import">How import works →</a></p></article>
+          <article class="card reveal"><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#sparkles"/></svg></span><h3>Start a new project</h3><p>Describe it. ALEN finds the gaps in the requirements, proposes an architecture for you to approve, generates real scaffolds with CI and Helm, then agents implement and verify each component.</p><p style="margin-top:12px"><a href="how-it-works.html#new">How a new project works →</a></p></article>
+        </div>
+      </div>
+    </section>
+
     <section class="block alt">
       <div class="wrap">
         <div class="sec-head reveal">
@@ -110,5 +158,6 @@
   </main>
   <div data-site-foot></div>
   <script src="assets/site.js"></script>
+  <script src="assets/live.js"></script>
 </body>
 </html>
