@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy · Project ALEN</title>
+  <meta name="description" content="What Project ALEN stores for a trial key, why, and how to have it removed." />
+  <meta name="theme-color" content="#2f5bea" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="assets/theme-init.js"></script>
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body data-page="privacy">
+  <div data-site-head></div>
+  <main id="main" class="prose">
+    <h1>Privacy notice</h1>
+    <p class="mut">For the Project ALEN trial page and subscription keys. Last updated 10 November 2026.</p>
+
+    <h2>What we store</h2>
+    <p>When you create a trial key we store, with the key:</p>
+    <ul>
+      <li>your name, email address and role, and your company and intended use if you give them;</li>
+      <li>an account identifier from Firebase Authentication (Google sign-in, or email and password);</li>
+      <li>when the key was created, how long it lasts, and that you agreed to this notice.</li>
+    </ul>
+    <p>Passwords are handled by Firebase Authentication; we never see them. This site uses no analytics or advertising cookies.</p>
+
+    <h2>Why</h2>
+    <ul>
+      <li>To make one trial per account and to check the key when Project ALEN starts.</li>
+      <li>To show your name and the time left inside the app.</li>
+      <li>To understand who uses Project ALEN, so we can improve it. We do not sell or share your details.</li>
+    </ul>
+
+    <h2>Where</h2>
+    <p>The data is kept in Google Firebase (Authentication and Cloud Firestore) in the project “project-alen”. In VS Code the key is kept in the editor's secret storage, and your name and the key's end date in a file in your home folder (<code>~/.ai-architect/global-memory.json</code>). The extension does not send your code or project data to us.</p>
+
+    <h2>How long</h2>
+    <p>Trial records are kept while the product is in trial, and at most 24 months after the key ends, unless you ask us to remove them sooner.</p>
+
+    <h2>Your choices</h2>
+    <ul>
+      <li>Remove the key from a machine with <b>Project ALEN: Remove Subscription Key</b>.</li>
+      <li>Ask for a copy of your data, a correction or deletion by opening an issue on the site's GitHub repository (do not post your key or personal details there; we will reply and verify by email).</li>
+    </ul>
+    <p style="margin-top:28px"><a class="btn pri" href="trial.html">Back to the trial</a></p>
+  </main>
+  <div data-site-foot></div>
+  <script src="assets/site.js"></script>
+</body>
+</html>

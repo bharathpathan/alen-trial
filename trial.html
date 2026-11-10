@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Free trial · Project ALEN</title>
+  <meta name="description" content="Get a free 7-day Project ALEN key: sign in, tell us a little about you, and copy your key into VS Code." />
+  <meta name="theme-color" content="#2f5bea" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="assets/theme-init.js"></script>
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body data-page="trial">
+  <div data-site-head></div>
+  <main id="main" class="trial">
+    <div class="wrap">
+      <div class="trial-aside">
+        <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#key"/></svg>Free for 7 days</span>
+        <h1>Your Project ALEN <span class="grad">trial key</span></h1>
+        <p class="lead">Every feature, for seven days. Sign in, tell us a little about you, and paste the key into VS Code.</p>
+        <ul class="perks">
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#sparkles"/></svg></span><div><b>Everything included</b><span>Architecture, agents, quality, security, data, APIs and memory.</span></div></li>
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#lock"/></svg></span><div><b>No card, no call</b><span>We only ask what helps us make ALEN better for you.</span></div></li>
+          <li><span class="ico"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#timer"/></svg></span><div><b>Exactly 7 days</b><span>The clock starts when the key is created; the app shows the time left.</span></div></li>
+        </ul>
+        <p class="mut" style="margin-top:22px;font-size:14px">New here? Read the <a href="walkthrough.html">walkthrough</a> first.</p>
+      </div>
+
+      <div class="panel" aria-live="polite">
+        <div class="progress" aria-hidden="true"><span id="p1" class="on"></span><span id="p2"></span><span id="p3"></span></div>
+
+        <div id="step-loading" role="status"><div style="display:flex;gap:10px;align-items:center;color:var(--mut)"><span class="spinner"></span>Loading…</div></div>
+
+        <section id="step-signin" hidden aria-labelledby="signin-title">
+          <h2 id="signin-title">Sign in to start</h2>
+          <p class="sub">One trial per account. Signing in again later shows your key.</p>
+          <div class="form">
+            <button class="btn block" id="google-btn" type="button"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#google"/></svg>Continue with Google</button>
+            <div class="divider">or with email</div>
+            <div class="tabs" role="tablist" aria-label="Email account">
+              <button type="button" role="tab" id="tab-new" aria-selected="true" aria-controls="email-form">New account</button>
+              <button type="button" role="tab" id="tab-old" aria-selected="false" aria-controls="email-form">I have an account</button>
+            </div>
+            <form id="email-form" class="form" style="margin-top:0" novalidate>
+              <div class="field"><label for="email">Email</label><input id="email" type="email" autocomplete="email" required /></div>
+              <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="new-password" minlength="8" required /><small id="pw-hint">At least 8 characters.</small></div>
+              <button class="btn pri block" id="email-btn" type="submit"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#mail"/></svg><span>Create account</span></button>
+              <button class="btn sm" id="reset-btn" type="button" hidden style="align-self:flex-start">Forgot the password?</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="step-verify" hidden aria-labelledby="verify-title">
+          <h2 id="verify-title">Confirm your email</h2>
+          <p class="sub">We sent a link to <b id="verify-email"></b>. Open it, then come back here.</p>
+          <div class="form">
+            <button class="btn pri block" id="verified-btn" type="button">I have confirmed it</button>
+            <button class="btn block" id="resend-btn" type="button">Send the link again</button>
+            <button class="btn sm" data-signout type="button" style="align-self:flex-start">Use another account</button>
+          </div>
+        </section>
+
+        <section id="step-details" hidden aria-labelledby="details-title">
+          <h2 id="details-title">About you</h2>
+          <p class="sub">This is shown in the app with your key, and helps us shape the product.</p>
+          <div class="who" style="margin-top:18px"><span class="avatar" data-avatar></span><div><b data-name></b><span data-email></span></div><button class="btn sm" data-signout type="button">Switch</button></div>
+          <form id="details-form" class="form" novalidate>
+            <div class="field"><label for="name">Full name</label><input id="name" autocomplete="name" maxlength="100" required /></div>
+            <div class="two">
+              <div class="field"><label for="company">Company <span class="mut">(optional)</span></label><input id="company" autocomplete="organization" maxlength="120" /></div>
+              <div class="field"><label for="role">Role</label>
+                <select id="role" required>
+                  <option value="">Choose…</option><option>Software engineer</option><option>Architect</option><option>Tech lead / manager</option><option>CTO / founder</option><option>DevOps / platform</option><option>QA / test</option><option>Student</option><option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="field"><label for="purpose">What will you use it for? <span class="mut">(optional)</span></label><textarea id="purpose" maxlength="500" placeholder="e.g. modernising a Java monolith, a new SaaS backend…"></textarea></div>
+            <label class="check"><input id="consent" type="checkbox" required /><span>I agree that Project ALEN stores these details with my key to run the trial, as described in the <a href="privacy.html" target="_blank" rel="noopener">privacy notice</a>.</span></label>
+            <button class="btn pri block" id="create-btn" type="submit"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#key"/></svg><span>Create my 7-day key</span></button>
+          </form>
+        </section>
+
+        <section id="step-key" hidden aria-labelledby="key-title">
+          <h2 id="key-title">Your key is ready</h2>
+          <p class="sub" id="key-sub">Copy it into Project ALEN in VS Code.</p>
+          <div class="keybox">
+            <code id="key-value"></code>
+            <button class="btn pri sm" id="copy-btn" type="button"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#copy"/></svg><span>Copy key</span></button>
+          </div>
+          <div class="countdown" id="countdown" role="timer" aria-label="Time left on this key">
+            <div><b data-d>07</b><span>days</span></div><div><b data-h>00</b><span>hours</span></div><div><b data-m>00</b><span>min</span></div><div><b data-s>00</b><span>sec</span></div>
+          </div>
+          <p class="mut" style="margin-top:10px;font-size:13.5px">Ends <b id="key-ends"></b></p>
+          <ol class="next">
+            <li>In VS Code, run <b>Project ALEN: Open Workbench</b>.</li>
+            <li>Paste the key and choose <b>Activate</b>.</li>
+            <li>Your details and the time left show at every start.</li>
+          </ol>
+          <div class="who" style="margin-top:18px"><span class="avatar" data-avatar></span><div><b data-name></b><span data-email></span></div><button class="btn sm" data-signout type="button">Sign out</button></div>
+        </section>
+
+        <p id="error" class="alert bad" role="alert" hidden style="margin-top:16px"></p>
+        <p id="info" class="alert ok" role="status" hidden style="margin-top:16px"></p>
+      </div>
+    </div>
+  </main>
+  <div data-site-foot></div>
+  <script src="assets/site.js"></script>
+  <script type="module" src="assets/trial.js"></script>
+</body>
+</html>

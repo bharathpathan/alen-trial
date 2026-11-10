@@ -1,0 +1,57 @@
+rules_version = '2';
+
+// Project ALEN subscription keys (plan 34). Deploy with: firebase deploy --only firestore:rules --project project-alen
+//
+//   keys/{key}    one per key. Anyone holding a key may read that one document (the extension checks it this way);
+//                 nobody may list keys. A signed-in person with a confirmed email may create exactly one trial key:
+//                 plan "trial", days 7, createdAt the server's time, their own uid and email. Paid keys come later and
+//                 are written by an administrator (the Admin SDK is not bound by these rules). Set revoked: true in the
+//                 console to withdraw a key.
+//   trials/{uid}  marks that an account has had its trial; written in the same batch as the key, never changed.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function confirmed() {
+      return request.auth.token.email_verified == true || request.auth.token.firebase.sign_in_provider == 'google.com';
+    }
+    function isKey(k) { return k.matches('^ALEN-[A-Z2-7]{32}$'); }
+    function text(d, f, max) { return d[f] is string && d[f].size() <= max; }
+    function optionalText(d, f, max) { return !(f in d) || text(d, f, max); }
+    function trialPath(uid) { return /databases/$(database)/documents/trials/$(uid); }
+
+    match /keys/{key} {
+      allow get: if isKey(key);
+      allow list, update, delete: if false;
+      allow create: if signedIn() && confirmed() && isKey(key)
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'email', 'company', 'role', 'purpose', 'plan', 'days', 'consent', 'createdAt'])
+        && request.resource.data.keys().hasAll(['uid', 'name', 'email', 'role', 'plan', 'days', 'consent', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.plan == 'trial'
+        && request.resource.data.days == 7
+        && request.resource.data.consent == true
+        && request.resource.data.createdAt == request.time
+        && text(request.resource.data, 'name', 100) && request.resource.data.name.size() > 0
+        && text(request.resource.data, 'role', 60) && request.resource.data.role.size() > 0
+        && optionalText(request.resource.data, 'company', 120)
+        && optionalText(request.resource.data, 'purpose', 500)
+        && !exists(trialPath(request.auth.uid))
+        && getAfter(trialPath(request.auth.uid)).data.key == key;
+    }
+
+    match /trials/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list, update, delete: if false;
+      allow create: if signedIn() && confirmed() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['key', 'createdAt'])
+        && isKey(request.resource.data.key)
+        && request.resource.data.createdAt == request.time
+        && getAfter(/databases/$(database)/documents/keys/$(request.resource.data.key)).data.uid == uid;
+    }
+
+    // Nothing else is readable or writable.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

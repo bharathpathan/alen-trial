@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Walkthrough · Project ALEN</title>
+  <meta name="description" content="Step by step: get a trial key, activate Project ALEN in VS Code, open a project, model it and make your first verified change." />
+  <meta name="theme-color" content="#2f5bea" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <script src="assets/theme-init.js"></script>
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+<body data-page="walkthrough">
+  <div data-site-head></div>
+  <main id="main">
+    <section class="hero" style="padding-bottom:28px">
+      <div class="wrap" style="grid-template-columns:1fr">
+        <div>
+          <span class="eyebrow"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#timer"/></svg>About 10 minutes</span>
+          <h1>Walkthrough: <span class="grad">from key to first verified change</span></h1>
+          <p class="lead">Six steps. Follow along in VS Code; each step shows what you will see.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" style="padding-top:24px">
+      <div class="wrap walk">
+        <nav class="walk-nav" aria-label="Steps">
+          <a href="#key" class="on"><b>1</b><span>Get a trial key</span></a>
+          <a href="#install"><b>2</b><span>Install the extension</span></a>
+          <a href="#activate"><b>3</b><span>Activate your key</span></a>
+          <a href="#project"><b>4</b><span>Open or import a project</span></a>
+          <a href="#ai"><b>5</b><span>Connect an AI model</span></a>
+          <a href="#change"><b>6</b><span>Make a verified change</span></a>
+        </nav>
+        <div>
+          <article class="walk-step" id="key">
+            <span class="kicker">Step 1</span><h2>Get a free trial key</h2>
+            <p>Open the <a href="trial.html">trial page</a>, sign in with Google or with an email and password (we send a link to confirm the address), and fill in a few details. Your key appears straight away, with the exact time it ends.</p>
+            <div class="shot mock" aria-label="Example of the key shown on the trial page">
+              <div class="mock-row"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#key"/></svg><span class="mock-key">ALEN-7Q2M…K4ZD</span><span class="mut" style="margin-left:auto">7 days left</span></div>
+            </div>
+            <ul class="tips"><li>One trial per account. Signing in again shows the same key.</li><li>Keep the key private: it is how ALEN knows the trial is yours.</li></ul>
+          </article>
+
+          <article class="walk-step" id="install">
+            <span class="kicker">Step 2</span><h2>Install Project ALEN in VS Code</h2>
+            <p>Install the <code>.vsix</code> you received: in VS Code open the Extensions view, choose <b>…</b> then <b>Install from VSIX…</b>, and pick the file. Or run:</p>
+            <div class="shot mock"><div class="mock-row mono">code --install-extension project-alen-0.18.1.vsix</div></div>
+          </article>
+
+          <article class="walk-step" id="activate">
+            <span class="kicker">Step 3</span><h2>Activate your key</h2>
+            <p>Press <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>P</kbd> (<kbd>⌘</kbd> <kbd>Shift</kbd> <kbd>P</kbd> on a Mac) and run <b>Project ALEN: Open Workbench</b>. The first time, ALEN asks for your key. Paste it and choose <b>Activate</b>.</p>
+            <div class="shot palette" aria-label="The VS Code command palette">
+              <div class="q">&gt; Project ALEN</div>
+              <div class="r on"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#logo"/></svg>Project ALEN: Open Workbench</div>
+              <div class="r"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#key"/></svg>Project ALEN: Enter Subscription Key</div>
+              <div class="r"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#timer"/></svg>Project ALEN: Show Subscription and Time Left</div>
+            </div>
+            <ul class="tips"><li>At every start ALEN checks the key, greets you and shows the time left.</li><li>The time left is always in the status bar and in the account menu at the top right of the workbench.</li><li>When the trial ends, the workbench stops at the key screen. Paid plans are coming soon.</li></ul>
+          </article>
+
+          <article class="walk-step" id="project">
+            <span class="kicker">Step 4</span><h2>Open or import a project</h2>
+            <p>Open a folder in VS Code. A folder with an ALEN model loads straight away; any other folder goes to <b>Import</b>, where ALEN reads the code and proposes its components, APIs and data. Review the proposal and accept what is right.</p>
+            <div class="shot mock">
+              <div class="mock-row"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#folder"/></svg>shop-platform<span class="mut" style="margin-left:auto">5 components found</span></div>
+              <div class="mock-row"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#graph"/></svg>orders-api · Spring Boot<span class="mut" style="margin-left:auto">12 endpoints</span></div>
+              <div class="mock-row"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#graph"/></svg>web · React<span class="mut" style="margin-left:auto">calls orders-api</span></div>
+            </div>
+            <ul class="tips"><li>Trust the folder when asked: agents only write and run commands in trusted folders.</li></ul>
+          </article>
+
+          <article class="walk-step" id="ai">
+            <span class="kicker">Step 5</span><h2>Connect an AI model</h2>
+            <p>Go to <b>Settings → AI connections</b> and add a provider: OpenAI, Anthropic, Gemini, a local model, or any compatible endpoint. Keys are stored in VS Code's secret storage. ALEN routes each task to the model that does it best, within your budget.</p>
+          </article>
+
+          <article class="walk-step" id="change">
+            <span class="kicker">Step 6</span><h2>Make your first verified change</h2>
+            <p>Open <b>Agent</b> and describe what you want, for example “add pagination to the orders list”. ALEN plans, works in an isolated copy, builds and tests, and hands you a draft with the evidence.</p>
+            <div class="shot mock">
+              <div class="mock-row"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#agent"/></svg>Plan approved · 4 steps</div>
+              <div class="mock-row"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#code"/></svg>6 files changed · +184 −22</div>
+              <div class="mock-row"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#check"/></svg>Build ✓ · Tests 42/42 ✓ · Contracts ✓</div>
+            </div>
+            <ol><li>Read the diff and the checks.</li><li>Apply the draft, or send it back with a note.</li><li>Record the decision on the <b>Memory</b> page so the next agent knows.</li></ol>
+            <div class="cta"><a class="btn pri" href="trial.html"><svg class="i" aria-hidden="true"><use href="assets/icons.svg#key"/></svg>Get my trial key</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div data-site-foot></div>
+  <script src="assets/site.js"></script>
+</body>
+</html>
